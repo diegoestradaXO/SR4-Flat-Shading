@@ -1,6 +1,8 @@
-# ===============================================================
-# Loads an OBJ file
-# ===============================================================
+def try_int(s, base=10, val=None):
+  try:
+    return int(s, base)
+  except ValueError:
+    return val
 
 class Obj(object):
     def __init__(self, filename):
@@ -8,7 +10,7 @@ class Obj(object):
             self.lines = f.read().splitlines()
 
         self.vertices = []
-        self.faces = []
+        self.vfaces = []
         self.read()
 
     def read(self):
@@ -19,4 +21,4 @@ class Obj(object):
                 if prefix == 'v':
                     self.vertices.append(list(map(float, value.split(' '))))
                 elif prefix == 'f':
-                    self.faces.append([list(map(int , face.split('/'))) for face in value.split(' ')])
+                    self.vfaces.append([list(map(int , face.split('/'))) for face in value.split(' ')])
